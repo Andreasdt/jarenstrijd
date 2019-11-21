@@ -2,26 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jarenstrijd</title>
+
+    {% load static %}
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="jquery-3.4.1.min.js"></script>
+
+    <!-- Ajax script -->
+    <script>
+        function increaseCounter(jaar, sprong) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "increase_counter/" + jaar + "/" + sprong + "/", true)
+            xhttp.send()
+        }
+    </script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
 </head>
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>Gnorgl Jarenstrijd</h1>
+        <h1 class="display-1">Gnorgl Jarenstrijd</h1>
     </div>
-    <div>
-        <ul class="list-group">
-        {% for jaar in jaren %}
-            <li class="list-group-item">
-                <p>{{jaar.jaar_naam}}</p>
-            </li>
-        {% endfor %}
-        </ul>
+    <div class="container">
+        <table class="table table-borderless table-dark">
+            <thead>
+                <tr>
+                    <th>Jaar</th>
+                    <th>Aantal punten</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for jaar in jaren %}
+                <tr>
+                    <th>{{jaar.jaar_naam}}</th>
+                    <th>
+                        <div class="btn-group">
+                            <button onclick="changeCounter({{jaar.jaar}}, -10)" type="button" class="btn btn-default">-10</button>
+                            <button onclick="changeCounter({{jaar.jaar}}, -5)" type="button" class="btn btn-default">-5</button>
+                            <button onclick="changeCounter({{jaar.jaar}}, -1)" type="button" class="btn btn-default">-1</button>
+                        </div>
+                        {{jaar.aantal_punten}}
+                        <div class="btn-group">
+                            <button onclick="increaseCounter({{jaar.jaar}}, 1)" type="button" class="btn btn-default">+1</button>
+                            <button onclick="increaseCounter({{jaar.jaar}}, 5)"type="button" class="btn btn-default">+5</button>
+                            <button onclick="increaseCounter({{jaar.jaar}}, 10)"type="button" class="btn btn-default">+10</button>
+                        </div>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

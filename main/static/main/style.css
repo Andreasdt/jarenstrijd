@@ -1,0 +1,37 @@
+body {
+font-family: 'Arial', sans-serif;
+background-color: lightgrey;
+}
+
+.container {
+padding: 15px;
+}
+
+.page-header {
+margin: auto;
+text-align: center;
+}
+
+th {
+text-align: center;
+font-size: 3em;
+}
+
+.btn {
+font-size: 1em;
+color: theme-color("dark");
+background-color: white;
+border: 1px solid black;
+}
+
+.btn-group {
+margin: 0px 25px;
+}
+
+.btn:hover {
+background-color: lightgrey;
+}
+
+.table {
+border-radius: 15px;
+}
