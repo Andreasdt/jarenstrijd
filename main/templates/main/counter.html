@@ -16,6 +16,13 @@
     <script>
         function increaseCounter(jaar, sprong) {
             var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var punten = this.responseText.match(/\d/g);
+                    punten = punten.join("");
+                    document.getElementById("punten"+jaar).innerHTML = punten;
+                }
+            };
             xhttp.open("POST", "increase_counter/" + jaar + "/" + sprong + "/", true)
             xhttp.send()
         }
@@ -25,6 +32,13 @@
     <script>
         function decreaseCounter(jaar, sprong) {
             var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var punten = this.responseText.match(/\d/g);
+                    punten = punten.join("");
+                    document.getElementById("punten"+jaar).innerHTML = punten;
+                }
+            };
             xhttp.open("POST", "decrease_counter/" + jaar + "/" + sprong + "/", true)
             xhttp.send()
         }
@@ -36,6 +50,7 @@
 <div class="container">
     <div class="page-header">
         <h1 class="display-1">Gnorgl Jarenstrijd</h1>
+        <h4>Ga naar <a href="display/">scorebord</a></h4>
     </div>
     <div class="container">
         <table class="table table-borderless table-dark">
@@ -55,11 +70,11 @@
                             <button onclick="decreaseCounter({{jaar.jaar}}, 5)" type="button" class="btn btn-default">-5</button>
                             <button onclick="decreaseCounter({{jaar.jaar}}, 1)" type="button" class="btn btn-default">-1</button>
                         </div>
-                        {{jaar.aantal_punten}}
+                        <p class="d-inline" id="punten{{jaar.jaar}}">{{jaar.aantal_punten}}</p>
                         <div class="btn-group">
                             <button onclick="increaseCounter({{jaar.jaar}}, 1)" type="button" class="btn btn-default">+1</button>
-                            <button onclick="increaseCounter({{jaar.jaar}}, 5)"type="button" class="btn btn-default">+5</button>
-                            <button onclick="increaseCounter({{jaar.jaar}}, 10)"type="button" class="btn btn-default">+10</button>
+                            <button onclick="increaseCounter({{jaar.jaar}}, 5)" type="button" class="btn btn-default">+5</button>
+                            <button onclick="increaseCounter({{jaar.jaar}}, 10)" type="button" class="btn btn-default">+10</button>
                         </div>
                     </th>
                 </tr>
