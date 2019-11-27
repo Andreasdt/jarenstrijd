@@ -15,3 +15,9 @@ def counter(request):
 def increase_counter(request, jaar, sprong):
     _response = Jaar.objects.filter(jaar=jaar).update(aantal_punten=F('aantal_punten') + sprong)
     return JsonResponse
+
+
+@csrf_exempt
+def decrease_counter(request, jaar, sprong):
+    _response = Jaar.objects.filter(jaar=jaar).update(aantal_punten=F('aantal_punten') - sprong)
+    return JsonResponse

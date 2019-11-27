@@ -12,14 +12,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="jquery-3.4.1.min.js"></script>
-
     <!-- Ajax script -->
     <script>
         function increaseCounter(jaar, sprong) {
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "increase_counter/" + jaar + "/" + sprong + "/", true)
+            xhttp.send()
+        }
+    </script>
+
+    <!-- Ajax script -->
+    <script>
+        function decreaseCounter(jaar, sprong) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "decrease_counter/" + jaar + "/" + sprong + "/", true)
             xhttp.send()
         }
     </script>
@@ -45,9 +51,9 @@
                     <th>{{jaar.jaar_naam}}</th>
                     <th>
                         <div class="btn-group">
-                            <button onclick="changeCounter({{jaar.jaar}}, -10)" type="button" class="btn btn-default">-10</button>
-                            <button onclick="changeCounter({{jaar.jaar}}, -5)" type="button" class="btn btn-default">-5</button>
-                            <button onclick="changeCounter({{jaar.jaar}}, -1)" type="button" class="btn btn-default">-1</button>
+                            <button onclick="decreaseCounter({{jaar.jaar}}, 10)" type="button" class="btn btn-default">-10</button>
+                            <button onclick="decreaseCounter({{jaar.jaar}}, 5)" type="button" class="btn btn-default">-5</button>
+                            <button onclick="decreaseCounter({{jaar.jaar}}, 1)" type="button" class="btn btn-default">-1</button>
                         </div>
                         {{jaar.aantal_punten}}
                         <div class="btn-group">
